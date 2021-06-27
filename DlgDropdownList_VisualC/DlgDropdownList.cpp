@@ -136,7 +136,13 @@ int CDlgDropdownListApp::ParseProgramArguments(CStringArray* arrParams)
 
     do
     {
-        if (cmdParam.GetLength() >= curPos && cmdParam.GetAt(curPos) == '\"')
+        if (cmdParam.GetLength() >= curPos && cmdParam.GetAt(curPos) == ' ')
+        {
+            // "..." を切り出した次の引数解析は、curPosが空白文字を指すので、文字を一つ先に進める
+            ++curPos;
+            continue;
+        }
+        else if (cmdParam.GetLength() >= curPos && cmdParam.GetAt(curPos) == '\"')
         {
             // "で括われた引数の場合
             ++curPos;
